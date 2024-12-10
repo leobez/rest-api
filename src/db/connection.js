@@ -42,6 +42,23 @@ db.serialize(() => {
         }
     }),
 
+    // Create table 'Favorite'
+    db.run(`
+        CREATE TABLE Favorite(
+            favoriteId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            userId INTEGER NOT NULL,
+            characterId INTEGER NOT NULL,
+            characterName VARCHAR(255) NOT NULL,
+            FOREIGN KEY (userId) REFERENCES Users (userId)
+        )
+    `, (err) => {
+        if (err) {
+            console.log('Error while creating "Favorite" table', err.message)
+        } else {
+            console.log('Table Favorite created')
+        }
+    }),
+
     // Insert some data just for testing (Users)
     // username: user1
     // password: pass1
