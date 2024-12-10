@@ -53,6 +53,34 @@ class CharacterService {
         }
     }
 
+    static async updateFavorite(userId, favoriteId, newCharacterId) {
+        try {
+
+            // Validate that favoriteId exists
+            const favorite = await FavoriteModel.read({by: 'favoriteId', all: false, data: favoriteId})
+            if (!favorite) throw new CustomError(404, "Resource not found", ['Favorite Id on URL params was not found on database'])
+            
+            // Validate that favorite belongs to this user
+            if (Number(favorite.userId) !== Number(userId)) throw new CustomError(403, "Forbidden", ['Favorite id does not belong to this user'])
+
+            // Validate that new characterId exists
+            const character = await RickAndMortyService.getCharacterById(newCharacterId)
+            if (character.error === 'Character not found') throw new CustomError(404, "Resource not found", ['Invalid id for new favorite'])
+        
+            // Update
+            const updatedFavorite = await FavoriteModel.update(favoriteId, character)
+            return updatedFavorite
+
+        } catch (error) {
+            if (error.type === 'model') {
+                // This means an error ocurred while accesssing the database, which is not something the client needs to know
+                // At this point it is possible to implement a way to save the error message in a log file so it can be debugged later
+                throw new CustomError(500, 'Server error', ['Try again later'])
+            }
+            throw error;
+        }
+    }
+
 }
 
 module.exports = CharacterService

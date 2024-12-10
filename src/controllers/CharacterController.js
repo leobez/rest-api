@@ -68,6 +68,29 @@ class CharacterController {
         }
     }
 
+    static async updateFavorites(req, res) {
+        try {
+
+            const userData = req.user
+            const {id:favoriteId} = req.params
+            const {newId:newCharacterId} = req.body
+
+            const updatedFavorite = await CharacterService.updateFavorite(userData.userId, favoriteId, newCharacterId)
+
+            return res.status(200).json({
+                message: 'Resource updated',
+                data: updatedFavorite
+            })
+
+        } catch (error) {
+            return res.status(error.status).json({
+                message: error.message,
+                details: error.details
+            })
+        }
+    }
+
+
 }
 
 module.exports = CharacterController

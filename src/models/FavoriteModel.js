@@ -29,6 +29,7 @@ class FavoriteModel {
         
         let query = ''
         if (by === 'userId') query = 'SELECT * FROM Favorite WHERE userId = ?'
+        if (by === 'favoriteId') query = 'SELECT * FROM Favorite WHERE favoriteId = ?'
         if (!query) return;
 
         if (all) {
@@ -52,8 +53,23 @@ class FavoriteModel {
         }
     }
 
-    static update() {
-        /* ... */
+    static update(favoriteId, newCharacterData) {
+
+        return new Promise((resolve, reject) => {
+            return db.run('UPDATE Favorite SET characterId = ?, characterName = ? WHERE favoriteId = ?', [newCharacterData.id, newCharacterData.name, favoriteId], function(err) {
+                if (err) {
+                    return reject({type: 'model', error: err.message})
+                }
+                const lastId = this.lastID
+
+                db.get('SELECT * FROM Favorite WHERE favoriteId = ?', lastId, function(err, row) {
+                    if (err) {
+                        return reject({type: 'model', error: err.message})
+                    }
+                    return resolve(row)
+                })
+            })
+        })
     }
 
     static delete() {
