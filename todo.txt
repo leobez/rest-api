@@ -1,5 +1,7 @@
--> Usuário não autenticados podem usar o sistem, porém menos.
+-> Implementar limitador de requisições por Usuário
 
--> Implementar funcionalidades da API externa (Talvez implementar outra rota as funcionalidades que envolvem api externa)
+-> Revistar status http error codes
 
--> Documentation (README)
+-> Implementar ultimas duas rotas (/favorite/episode-count-fav e /favorite/episode-count-all)
+
+-> Fazer documentação (README)
