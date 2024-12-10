@@ -105,12 +105,26 @@ class CharacterService {
         }
     }
 
-    static async listEpsFavoriteShows(userId) {
+    static async listEpsFavoriteAppears(userId) {
+        
         try {
 
             // Get favorite characters from user
             const favorites = await FavoriteModel.read({by: 'userId', all: true, data: userId})
-            console.log('favorites: ', favorites)
+            let favoritesId = favorites.map((favorite) => favorite.characterId)
+
+            // Get qty of eps each favorite character appears
+            const favoriteCharactersData = await RickAndMortyService.getCharactersById(favoritesId)
+
+            const amountOfEpsForEach = favoriteCharactersData.map((favCharacterData) => {
+                return {
+                    characterId: favCharacterData.id,
+                    characterName: favCharacterData.name,
+                    amountOfEps: favCharacterData.episode.length,
+                }
+            })
+
+            return amountOfEpsForEach
 
         } catch (error) {
             if (error.type === 'model') {

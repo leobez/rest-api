@@ -24,6 +24,21 @@ class RickAndMortyService {
         }
     }
 
+    static async getCharactersById(charactersId) {
+        try {
+            const convertedCharactersId = charactersId.join(',')
+            if (convertedCharactersId.trim() === '') return []
+
+            const result = await fetch(`${charactersUrl}/${convertedCharactersId}`)
+            const data = await result.json()
+            
+            return data;
+
+        } catch (error) {
+            throw new CustomError(502, "Bad Gateway", ['Failed to retrieve data from third-party api'])
+        }
+    }
+
 }
 
 module.exports = RickAndMortyService

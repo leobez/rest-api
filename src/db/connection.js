@@ -73,6 +73,48 @@ db.serialize(() => {
         } else {
             console.log('Test data added on Users table: user1, pass1')
         }
+    }),
+
+    // Insert some data just for testing (Favorite)
+    // username: user1
+    // password: pass1
+    db.run(`
+        
+        INSERT INTO Favorite(userId, characterId, characterName) VALUES (?, ?, ?)
+
+    `, ['1', '1', 'Test_1'], (err) => {
+        
+        if (err) {
+            console.log('Error while inserting test data: ', err.message)
+        } else {
+            console.log('Test data added on Users table: user1, pass1')
+        }
+    }),
+    
+    db.run(`
+        
+        INSERT INTO Favorite(userId, characterId, characterName) VALUES (?, ?, ?)
+
+    `, ['1', '5', 'Test_5'], (err) => {
+        
+        if (err) {
+            console.log('Error while inserting test data: ', err.message)
+        } else {
+            console.log('Test data added on Users table: user1, pass1')
+        }
+    }),
+
+    db.run(`
+        
+        INSERT INTO Favorite(userId, characterId, characterName) VALUES (?, ?, ?)
+
+    `, ['1', '10', 'Test_10'], (err) => {
+        
+        if (err) {
+            console.log('Error while inserting test data: ', err.message)
+        } else {
+            console.log('Test data added on Users table: user1, pass1')
+        }
     })
 
 })

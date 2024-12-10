@@ -92,14 +92,12 @@ class CharacterController {
 
     static async removeFavorite(req, res) {
         try {
-
+            
             const userData = req.user
             const {id:favoriteId} = req.params
 
             const deletedFavorite = await CharacterService.removeFavorite(userData.userId, favoriteId)
             
-            console.log('deletedFavorite: ', deletedFavorite)
-
             return res.status(200).json({
                 message: 'Resource deleted',
                 data: deletedFavorite
@@ -113,18 +111,18 @@ class CharacterController {
         }
     }
 
-    static async listEpsFavoritesShows(req, res) {
+    static async listEpsFavoriteAppears(req, res) {
 
         try {
 
             const userData = req.user
-           
-            await CharacterController.listEpsFavoritesShows()
+
+            const data = await CharacterService.listEpsFavoriteAppears(userData.userId)
             
-            /* return res.status(200).json({
-                message: 'Resource deleted',
-                data: deletedFavorite
-            }) */
+            return res.status(200).json({
+                message: 'Resource retrieved',
+                data: data
+            }) 
 
         } catch (error) {
             console.log('ERROR: ', error)

@@ -55,9 +55,9 @@ router.delete(
 )
 
 router.get(
-    '/favorite/episode-count-fav',
+    '/favorite/episode-count-each',
     tokenValidator,
-    CharacterController.listEpsFavoritesShows
+    CharacterController.listEpsFavoriteAppears
 )
 
 router.get(
