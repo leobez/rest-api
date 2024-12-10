@@ -113,6 +113,27 @@ class CharacterController {
         }
     }
 
+    static async listEpsFavoritesShows(req, res) {
+
+        try {
+
+            const userData = req.user
+           
+            await CharacterController.listEpsFavoritesShows()
+            
+            /* return res.status(200).json({
+                message: 'Resource deleted',
+                data: deletedFavorite
+            }) */
+
+        } catch (error) {
+            console.log('ERROR: ', error)
+            return res.status(error.status).json({
+                message: error.message,
+                details: error.details
+            })
+        }
+    }
 
 }
 

@@ -14,25 +14,14 @@ class UserService {
 
     static async createUser(userData) {
 
-        // Verify if username is already being used
         try {
+            // Verify if username is already being used
             const isUsernameAlreadyUsed = await UserModel.read({by: 'username', data: userData.username})
             if (isUsernameAlreadyUsed) throw new CustomError(400, 'Bad request', ['Username already used'])
-        } catch (error) {
-            if (error.type === 'model') {
-                // This means an error ocurred while accesssing the database, which is not something the client needs to know
-                // At this point it is possible to implement a way to save the error message in a log file so we can debug it later
-                throw new CustomError(500, 'Server error', ['Try again later'])
-            }
-            throw error; // Passing errors to controller
-        }
-        
-        // Hash the password
-        const salt = bcrypt.genSaltSync(saltRounds)
-        const hash = bcrypt.hashSync(userData.password, salt)
-        
-        // Save user on database
-        try {
+
+            // Hash && salt password
+            const salt = bcrypt.genSaltSync(saltRounds)
+            const hash = bcrypt.hashSync(userData.password, salt)
 
             const newUserData = {
                 username: userData.username,
@@ -55,7 +44,7 @@ class UserService {
                 // At this point it is possible to implement a way to save the error message in a log file so we can debug it later
                 throw new CustomError(500, 'Server error', ['Try again later'])
             }
-            throw error; // not used because there are no errors on this trycatch block, only inside the model, which are already treated by the if statement above
+            throw error; // Passing errors to controller
         }
 
     }
