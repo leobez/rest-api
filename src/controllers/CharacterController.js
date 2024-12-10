@@ -12,7 +12,7 @@ class CharacterController {
             const data = await RickAndMortyService.getAllCharacters(page)
 
             return res.status(200).json({
-                message: 'Data retrieved',
+                message: 'Resource retrieved',
                 data: data.results
             })
 
@@ -50,7 +50,22 @@ class CharacterController {
     }
 
     static async listFavorites(req, res) {
+        try {
 
+            const userData = req.user
+            const favorites = await CharacterService.getFavoriteList(userData.userId)
+
+            return res.status(200).json({
+                message: 'Resource retrieved',
+                data: favorites
+            })
+
+        } catch (error) {
+            return res.status(error.status).json({
+                message: error.message,
+                details: error.details
+            })
+        }
     }
 
 }
