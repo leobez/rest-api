@@ -3,8 +3,9 @@ const router = express.Router()
 
 // Routes
 // User
-// ...
+// Character
 router.use('/api/user', require('./userRoutes'))
+router.use('/api/character', require('./characterRoutes'))
 
 // Test router
 router.get('/', (req, res) => {

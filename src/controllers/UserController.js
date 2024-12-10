@@ -86,7 +86,24 @@ class UserController {
         })
         
     }
-    
+
+    static async profile(req, res) {
+
+        const userData = req.user
+
+        const filteredUserData = {
+            userId: userData.userId,
+            username: userData.username,
+        }
+
+        // Send back to client
+        return res.status(201).json({
+            message: 'Data retrieved',
+            data: filteredUserData
+        })
+        
+    }
+
 }
 
 module.exports = UserController
