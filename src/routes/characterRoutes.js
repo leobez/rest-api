@@ -51,6 +51,7 @@ router.delete(
     param('id').exists().withMessage('Missing id').trim().notEmpty().withMessage('Empty id').isNumeric().withMessage('Invalid id'),
     dataValidator,
     tokenValidator,
+    CharacterController.removeFavorite
 )
 
 router.get(

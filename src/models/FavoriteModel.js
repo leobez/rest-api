@@ -54,7 +54,6 @@ class FavoriteModel {
     }
 
     static update(favoriteId, newCharacterData) {
-
         return new Promise((resolve, reject) => {
             return db.run('UPDATE Favorite SET characterId = ?, characterName = ? WHERE favoriteId = ?', [newCharacterData.id, newCharacterData.name, favoriteId], function(err) {
                 if (err) {
@@ -72,8 +71,15 @@ class FavoriteModel {
         })
     }
 
-    static delete() {
-        /* ... */
+    static delete(favoriteId) {
+        return new Promise((resolve, reject) => {
+            return db.run('DELETE FROM Favorite WHERE FavoriteId = ? ', [favoriteId], function(err) {
+                if (err) {
+                    return reject({type: 'model', error: err.message})
+                }
+                return resolve(true)
+            })
+        })
     }
 
 }
