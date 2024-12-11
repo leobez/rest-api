@@ -22,9 +22,12 @@ cd rest-api
 npm install
 ```
 
-4. Crie um arquivo .env na raiz do projeto
+4. Crie um arquivo .env na raiz do projeto e insira a chave abaixo ou utilize o comando echo.
 ``` env
-SECRET="CHAVE"
+SECRET=CHAVE
+```
+``` env
+echo "SECRET=CHAVE" >> .env
 ```
 
 5. Rode o app
