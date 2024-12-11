@@ -25,10 +25,10 @@ npm install
 
 4. Crie um arquivo .env na raiz do projeto e insira a linha abaixo ou utilize o comando echo:
 ``` env
-SECRET=CHAVE
+SECRET_KEY=CHAVE
 ```
 ``` env
-echo "SECRET=CHAVE" >> .env
+echo "SECRET_KEY=CHAVE" >> .env
 ```
 
 5. Rode o app:

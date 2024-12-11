@@ -53,22 +53,28 @@ class CharacterService {
         }
     }
 
-    static async updateFavorite(userId, favoriteId, newCharacterId) {
+    static async updateFavorite(userId, oldCharacterId, newCharacterId) {
         try {
 
-            // Validate that favoriteId exists
-            const favorite = await FavoriteModel.read({by: 'favoriteId', all: false, data: favoriteId})
-            if (!favorite) throw new CustomError(404, "Resource not found", ['Favorite Id on URL params was not found on database'])
-            
-            // Validate that favorite belongs to this user
-            if (Number(favorite.userId) !== Number(userId)) throw new CustomError(403, "Forbidden", ['Favorite does not belong to this user'])
+            // Bring all favorites from user
+            const favorites = await FavoriteModel.read({by: 'userId', all: true, data: userId})
 
+            // Validate that oldCharacterId is indeed a favorite of this user
+            let favoriteIdToBeUpdated = -1
+            for (let a=0; a<favorites.length; a++) {
+                if (Number(favorites[a].characterId) === Number(oldCharacterId)) {
+                    favoriteIdToBeUpdated = favorites[a].favoriteId
+                }
+            }
+
+            if (favoriteIdToBeUpdated === -1) throw new CustomError(400, "Bad request", ['User does not have this character in their favorites'])
+            
             // Validate that new characterId exists
             const character = await RickAndMortyService.getCharacterById(newCharacterId)
             if (character.error === 'Character not found') throw new CustomError(404, "Resource not found", ['Invalid id for new favorite'])
         
             // Update
-            const updatedFavorite = await FavoriteModel.update(favoriteId, character)
+            const updatedFavorite = await FavoriteModel.update(favoriteIdToBeUpdated, character)
             return updatedFavorite
 
         } catch (error) {
@@ -81,19 +87,27 @@ class CharacterService {
         }
     }
 
-    static async removeFavorite(userId, favoriteId) {
+    static async removeFavorite(userId, characterId) {
         try {
 
-            // Validate that favoriteId exists
-            const favorite = await FavoriteModel.read({by: 'favoriteId', all: false, data: favoriteId})
-            if (!favorite) throw new CustomError(404, "Resource not found", ['Favorite Id on URL params was not found on database'])
+            // Bring all favorites from user
+            const favorites = await FavoriteModel.read({by: 'userId', all: true, data: userId})
             
-            // Validate that favorite belongs to this user
-            if (Number(favorite.userId) !== Number(userId)) throw new CustomError(403, "Forbidden", ['Favorite does not belong to this user'])
+            // Validate that characterId is indeed a favorite of this user
+            let favoriteIdToBeDeleted = -1
+            let deletedFav
+            for (let a=0; a<favorites.length; a++) {
+                if (Number(favorites[a].characterId) === Number(characterId)) {
+                    favoriteIdToBeDeleted = favorites[a].favoriteId
+                    deletedFav = favorites[a]
+                }
+            }
+
+            if (favoriteIdToBeDeleted === -1) throw new CustomError(400, "Bad request", ['User does not have this character in their favorites'])
 
             // Delete
-            await FavoriteModel.delete(favoriteId)
-            return favorite
+            await FavoriteModel.delete(favoriteIdToBeDeleted)
+            return deletedFav
 
         } catch (error) {
             if (error.type === 'model') {

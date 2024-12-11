@@ -20,6 +20,7 @@ class CharacterController {
         } catch (error) {
 
             return res.status(error.status).json({
+                rateLimit: req.rateLimit,
                 message: error.message,
                 details: error.details
             })
@@ -38,12 +39,14 @@ class CharacterController {
             const favorite = await CharacterService.addToFavorite(id, userData.userId)
 
             return res.status(201).json({
+                rateLimit: req.rateLimit,
                 message: 'Resource created',
                 data: favorite
             })
 
         } catch (error) {
             return res.status(error.status).json({
+                rateLimit: req.rateLimit,
                 message: error.message,
                 details: error.details
             })
@@ -57,55 +60,61 @@ class CharacterController {
             const favorites = await CharacterService.getFavoriteList(userData.userId)
 
             return res.status(200).json({
+                rateLimit: req.rateLimit,
                 message: 'Resource retrieved',
                 data: favorites
             })
 
         } catch (error) {
             return res.status(error.status).json({
+                rateLimit: req.rateLimit,
                 message: error.message,
                 details: error.details
             })
         }
     }
 
-    static async updateFavorites(req, res) {
+    static async updateFavorite(req, res) {
         try {
 
             const userData = req.user
-            const {id:favoriteId} = req.params
+            const {id:oldCharacterId} = req.params
             const {newId:newCharacterId} = req.body
 
-            const updatedFavorite = await CharacterService.updateFavorite(userData.userId, favoriteId, newCharacterId)
+            const updatedFavorite = await CharacterService.updateFavorite(userData.userId, oldCharacterId, newCharacterId)
 
             return res.status(200).json({
+                rateLimit: req.rateLimit,
                 message: 'Resource updated',
                 data: updatedFavorite
             })
 
         } catch (error) {
             return res.status(error.status).json({
+                rateLimit: req.rateLimit,
                 message: error.message,
                 details: error.details
             })
         }
     }
 
-    static async removeFavorite(req, res) {
+    static async deleteFavorite(req, res) {
         try {
             
             const userData = req.user
-            const {id:favoriteId} = req.params
+            const {id:characterId} = req.params
 
-            const deletedFavorite = await CharacterService.removeFavorite(userData.userId, favoriteId)
+            const deletedFavorite = await CharacterService.removeFavorite(userData.userId, characterId)
             
             return res.status(200).json({
+                rateLimit: req.rateLimit,
                 message: 'Resource deleted',
                 data: deletedFavorite
             })
 
         } catch (error) {
             return res.status(error.status).json({
+                rateLimit: req.rateLimit,
                 message: error.message,
                 details: error.details
             })
@@ -121,6 +130,7 @@ class CharacterController {
             const data = await CharacterService.listEpsFavoriteAppears(userData.userId)
             
             return res.status(200).json({
+                rateLimit: req.rateLimit,
                 message: 'Resource retrieved',
                 data: data
             }) 
@@ -128,6 +138,7 @@ class CharacterController {
         } catch (error) {
             console.log('ERROR: ', error)
             return res.status(error.status).json({
+                rateLimit: req.rateLimit,
                 message: error.message,
                 details: error.details
             })
@@ -143,13 +154,17 @@ class CharacterController {
             const data = await CharacterService.listEpsAllFavoritesAppears(userData.userId)
             
             return res.status(200).json({
+                rateLimit: req.rateLimit,
                 message: 'Resource retrieved',
-                data: data.length
+                data: {
+                    amountOfEps: data.length
+                }
             }) 
 
         } catch (error) {
             console.log('ERROR: ', error)
             return res.status(error.status).json({
+                rateLimit: req.rateLimit,
                 message: error.message,
                 details: error.details
             })

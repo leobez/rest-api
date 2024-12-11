@@ -13,7 +13,6 @@ const SECRET = process.env.SECRET_KEY
 class UserService {
 
     static async createUser(userData) {
-
         try {
             // Verify if username is already being used
             const isUsernameAlreadyUsed = await UserModel.read({by: 'username', data: userData.username})
@@ -39,6 +38,7 @@ class UserService {
             };
 
         } catch (error) {
+            console.log('error: ', error)
             if (error.type === 'model') {
                 // This means an error ocurred while accesssing the database, which is not something the client needs to know
                 // At this point it is possible to implement a way to save the error message in a log file so we can debug it later

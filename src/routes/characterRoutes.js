@@ -46,7 +46,7 @@ router.put( // Update favorite
     dataValidator,
     tokenValidator,
     limiter,
-    CharacterController.updateFavorites
+    CharacterController.updateFavorite
 )
 
 router.delete( // Update favorite
@@ -55,7 +55,7 @@ router.delete( // Update favorite
     dataValidator,
     tokenValidator,
     limiter,
-    CharacterController.removeFavorite
+    CharacterController.deleteFavorite
 )
 
 router.get( // Count episodes each favorite character was in

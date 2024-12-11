@@ -10,7 +10,7 @@ class UserController {
             // Get data
             const userData = req.body
             
-            // Create user && generate token to auto-login them
+            // Create user && generate token
             const {user, token} = await UserServices.createUser(userData)
 
             const userInfo = {
