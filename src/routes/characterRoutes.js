@@ -12,8 +12,6 @@ const dataValidator = require('../middlewares/dataValidator') // Extracts the re
 const tokenValidator = require('../middlewares/tokenValidator') // Validates if user has jwt token or not
 const limiter = require('../middlewares/rateLimiter') // Sets rate limit for the routes that have it
 
-/* ALL THESE ROUTES HAVE A RATE LIMITER : 3 FOR USER WITHOUT JWT TOKEN AND 10 FOR USERS WITH IT */
-
 /* UNPROTECTED ROUTES: USER DOESNT NEEDS TO BE LOGGED IN TO ACCESS */
 router.get( // Get all characters
     '/',
