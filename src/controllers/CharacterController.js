@@ -12,6 +12,7 @@ class CharacterController {
             const data = await RickAndMortyService.getAllCharacters(page)
 
             return res.status(200).json({
+                rateLimit: req.rateLimit,
                 message: 'Resource retrieved',
                 data: data.results
             })
@@ -143,7 +144,7 @@ class CharacterController {
             
             return res.status(200).json({
                 message: 'Resource retrieved',
-                data: data
+                data: data.length
             }) 
 
         } catch (error) {

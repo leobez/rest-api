@@ -9,7 +9,7 @@ router.use('/api/character', require('./characterRoutes'))
 
 // Test router
 router.get('/', (req, res) => {
-    res.status(200).json({message: 'Api running'})
+    res.status(200).json({message: 'Api running', your_ip: req.ip})
 })
 
 // 404 router

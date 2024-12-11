@@ -11,6 +11,7 @@ const { body, cookie } = require('express-validator')
 const dataValidator = require('../middlewares/dataValidator') // Extracts the result of the validation and determines if there are errors or not
 const tokenValidator = require('../middlewares/tokenValidator') // Validates if user has token or not
 
+/* UNPROTECTED ROUTES: USER DOESNT NEEDS TO BE LOGGED IN TO ACCESS */
 router.post(
     '/register',
     body('username').exists().withMessage('Missing username').trim().notEmpty().withMessage('Empty username').escape(),
@@ -27,6 +28,8 @@ router.post(
     UserController.login
 )
 
+
+/* PROTECTED ROUTES: USER NEEDS TO BE LOGGED IN TO ACCESS */
 router.post(
     '/logout',
     cookie('jwt').exists().withMessage('Missing JWT on cookies').trim().notEmpty().withMessage('Empty JWT on cookies').escape(),

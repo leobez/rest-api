@@ -1,6 +1,3 @@
--> Implementar ultimas duas rotas (/favorite/episode-count-fav e /favorite/episode-count-all)
--> Implementar limitador de requisições por Usuário
-
 -> Talvez usar PATH nas invocações dos modulos
 -> Revistar status http error codes
 -> Fazer documentação (README)

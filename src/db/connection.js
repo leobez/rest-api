@@ -57,12 +57,12 @@ db.serialize(() => {
         } else {
             console.log('Table Favorite created')
         }
-    }),
+    })
 
     // Insert some data just for testing (Users)
     // username: user1
     // password: pass1
-    db.run(`
+/*     db.run(`
         
         INSERT INTO Users(username, password) VALUES (?, ?)
 
@@ -73,12 +73,12 @@ db.serialize(() => {
         } else {
             console.log('Test data added on Users table: user1, pass1')
         }
-    }),
+    }), */
 
     // Insert some data just for testing (Favorite)
     // username: user1
     // password: pass1
-    db.run(`
+/*     db.run(`
         
         INSERT INTO Favorite(userId, characterId, characterName) VALUES (?, ?, ?)
 
@@ -108,14 +108,14 @@ db.serialize(() => {
         
         INSERT INTO Favorite(userId, characterId, characterName) VALUES (?, ?, ?)
 
-    `, ['1', '3', 'Test_3'], (err) => {
+    `, ['1', '10', 'Test_3'], (err) => {
         
         if (err) {
             console.log('Error while inserting test data: ', err.message)
         } else {
             console.log('Test data added on Users table: user1, pass1')
         }
-    })
+    }) */
 
 })
 
