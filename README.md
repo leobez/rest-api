@@ -9,7 +9,7 @@ Teste técnico.
 ## Instalação
 1. Clone o repositório:
 ``` bash
-git clone https://github.com/leobez/api-rest.git
+git clone https://github.com/leobez/rest-api.git
 ```
 
 2. Entre no diretório:
