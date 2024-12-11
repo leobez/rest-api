@@ -2,7 +2,7 @@
 Teste técnico.
 
 ## Tecnologias necessárias
-- Node.js 22.12.0 (LTS)
+- [Node.js 22.12.0 (LTS)](https://nodejs.org/pt)
 - npm
 - Git bash
 
@@ -49,9 +49,9 @@ A API estará disponível em http://localhost:3000
   
 - Caso use o Postman, é possível importar o arquivo /rest-api/postman/api-rest.postman_collection.json.
   
-- A autenticação da aplicação é feita através de tokens JWT salvos nos cookies da requisição. Não é necessário configurar nenhuma forma de autenticação no Postman, visto que são configurados automaticamente.
+- A autenticação é feita através de tokens JWT salvos nos cookies da requisição. Não é necessário configurar nenhuma forma de autenticação no Postman.
 
-[ IMG ]
+<img src="https://raw.githubusercontent.com/leobez/rest-api/refs/heads/main/repo_imgs/cookie_auth.png"/>
 
 ## Rotas
 
