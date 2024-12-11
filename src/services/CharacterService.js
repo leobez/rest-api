@@ -106,7 +106,7 @@ class CharacterService {
     }
 
     static async listEpsFavoriteAppears(userId) {
-        
+
         try {
 
             // Get favorite characters from user
@@ -125,6 +125,66 @@ class CharacterService {
             })
 
             return amountOfEpsForEach
+
+        } catch (error) {
+            if (error.type === 'model') {
+                // This means an error ocurred while accesssing the database, which is not something the client needs to know
+                // At this point it is possible to implement a way to save the error message in a log file so it can be debugged later
+                throw new CustomError(500, 'Server error', ['Try again later'])
+            }
+            throw error;
+        }
+    }
+
+    static async listEpsAllFavoritesAppears(userId) {
+        
+        try {
+
+            // Get favorite characters from user
+            const favorites = await FavoriteModel.read({by: 'userId', all: true, data: userId})
+
+            // Map the id of favorite characters
+            const favoritesId = favorites.map((favorite) => favorite.characterId)
+
+            // Get data about every character
+            const favoriteCharactersData = await RickAndMortyService.getCharactersById(favoritesId)
+
+            // Map every episode to the amount of favorite character that appears on that episode
+            /* 
+                Result will be something like:
+                {
+                    'https://rickandmortyapi.com/api/episode/1' : 1,
+                    'https://rickandmortyapi.com/api/episode/2' : 2,
+                    'https://rickandmortyapi.com/api/episode/3' : 2,
+                    'https://rickandmortyapi.com/api/episode/4' : 3,
+                    ...
+                }
+            */
+            let hashMap = {}
+            favoriteCharactersData.forEach((favoriteCharacter) => {
+                favoriteCharacter.episode.forEach((episode) => {
+                    if (!hashMap[episode]) {
+                        hashMap[episode]=1
+                    } else {
+                        hashMap[episode]++
+                    }
+                })
+            })
+
+
+            // Now filter only the episodes which every favorite character appeared
+            /* 
+                Result will be something like:
+                [
+                    'https://rickandmortyapi.com/api/episode/4',
+                    ...
+                ]
+            */
+            const filteredData = Object.entries(hashMap)
+                .filter((EP_TO_FAV) => EP_TO_FAV[1] === favorites.length)
+                .map((EP_TO_FAV) => EP_TO_FAV[0])
+
+            return filteredData
 
         } catch (error) {
             if (error.type === 'model') {

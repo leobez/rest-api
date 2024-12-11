@@ -90,12 +90,12 @@ db.serialize(() => {
             console.log('Test data added on Users table: user1, pass1')
         }
     }),
-    
+
     db.run(`
         
         INSERT INTO Favorite(userId, characterId, characterName) VALUES (?, ?, ?)
 
-    `, ['1', '5', 'Test_5'], (err) => {
+    `, ['1', '2', 'Test_2'], (err) => {
         
         if (err) {
             console.log('Error while inserting test data: ', err.message)
@@ -108,7 +108,7 @@ db.serialize(() => {
         
         INSERT INTO Favorite(userId, characterId, characterName) VALUES (?, ?, ?)
 
-    `, ['1', '10', 'Test_10'], (err) => {
+    `, ['1', '3', 'Test_3'], (err) => {
         
         if (err) {
             console.log('Error while inserting test data: ', err.message)

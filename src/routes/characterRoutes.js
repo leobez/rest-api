@@ -62,7 +62,8 @@ router.get(
 
 router.get(
     '/favorite/episode-count-all',
-    tokenValidator
+    tokenValidator,
+    CharacterController.listEpsAllFavoritesAppears
 )
 
 module.exports = router

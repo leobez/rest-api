@@ -133,6 +133,28 @@ class CharacterController {
         }
     }
 
+    static async listEpsAllFavoritesAppears(req, res) {
+
+        try {
+
+            const userData = req.user
+
+            const data = await CharacterService.listEpsAllFavoritesAppears(userData.userId)
+            
+            return res.status(200).json({
+                message: 'Resource retrieved',
+                data: data
+            }) 
+
+        } catch (error) {
+            console.log('ERROR: ', error)
+            return res.status(error.status).json({
+                message: error.message,
+                details: error.details
+            })
+        }
+    }
+
 }
 
 module.exports = CharacterController
