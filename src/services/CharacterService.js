@@ -128,7 +128,12 @@ class CharacterService {
             let favoritesId = favorites.map((favorite) => favorite.characterId)
 
             // Get qty of eps each favorite character appears
-            const favoriteCharactersData = await RickAndMortyService.getCharactersById(favoritesId)
+            let favoriteCharactersData = await RickAndMortyService.getCharactersById(favoritesId)
+
+            // Convert data to array so it can user .map method
+            if (favorites.length === 1) {
+                favoriteCharactersData = [favoriteCharactersData]
+            }
 
             const amountOfEpsForEach = favoriteCharactersData.map((favCharacterData) => {
                 return {
@@ -161,7 +166,12 @@ class CharacterService {
             const favoritesId = favorites.map((favorite) => favorite.characterId)
 
             // Get data about every character
-            const favoriteCharactersData = await RickAndMortyService.getCharactersById(favoritesId)
+            let favoriteCharactersData = await RickAndMortyService.getCharactersById(favoritesId)
+
+            // Convert data to array so it can user .map method
+            if (favorites.length === 1) {
+                favoriteCharactersData = [favoriteCharactersData]
+            }
 
             // Map every episode to the amount of favorite character that appears on that episode
             /* 

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "5de38745-add5-42ef-8f54-7c9a0f86b322",
+		"_postman_id": "e680c0cf-6eb6-4479-bbe6-3c83ff4bbb70",
 		"name": "api-rest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "29215126"
@@ -178,7 +178,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"newId\": 1\r\n}",
+							"raw": "{\r\n    \"newId\": 2\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -186,7 +186,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL}}/api/character/favorite/2",
+							"raw": "{{URL}}/api/character/favorite/1",
 							"host": [
 								"{{URL}}"
 							],
@@ -194,7 +194,7 @@
 								"api",
 								"character",
 								"favorite",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -221,7 +221,7 @@
 					"response": []
 				},
 				{
-					"name": "List eps favorite characters shows",
+					"name": "List eps each favorite characters appears",
 					"request": {
 						"method": "GET",
 						"header": [],
