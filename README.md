@@ -22,13 +22,14 @@ cd rest-api
 npm install
 ```
 
-4. Crie um arquivo .env na raiz do projeto e insira a linha abaixo ou utilize o comando echo:
+4. Crie um arquivo .env na raiz do projeto e insira as linhas abaixo:
+
 ``` env
 SECRET_KEY=CHAVE
+PORT=3000
 ```
-``` env
-echo "SECRET_KEY=CHAVE" >> .env
-```
+
+OBS: O valor de PORT= pode ser qualquer porta que estiver disponível para você.
 
 5. Rode o app:
 ``` env

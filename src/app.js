@@ -1,7 +1,11 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
-const PORT = 3000
-require('dotenv').config()
+const PORT = process.env.PORT
+
+if (!PORT) {
+    return console.log('Missing PORT on .env file')
+}
 
 /* START DB CONNECTION */
 require('./db/connection')
