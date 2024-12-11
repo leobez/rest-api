@@ -17,12 +17,12 @@ git clone https://github.com/leobez/rest-api.git
 cd rest-api
 ```
 
-3. Instale as dependências 
+3. Instale as dependências:
 ``` bash
 npm install
 ```
 
-4. Crie um arquivo .env na raiz do projeto e insira a chave abaixo ou utilize o comando echo.
+4. Crie um arquivo .env na raiz do projeto e insira a linha abaixo ou utilize o comando echo:
 ``` env
 SECRET=CHAVE
 ```
@@ -30,11 +30,12 @@ SECRET=CHAVE
 echo "SECRET=CHAVE" >> .env
 ```
 
-5. Rode o app
+5. Rode o app:
 ``` env
 npm run nodemon
 ```
- A API estará disponível em http://localhost:3000
+ 
+A API estará disponível em http://localhost:3000
 
 ## Rotas
 
