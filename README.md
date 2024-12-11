@@ -14,7 +14,7 @@ git clone https://github.com/leobez/rest-api.git
 
 2. Entre no diretório:
 ``` bash
-cd api-rest
+cd rest-api
 ```
 
 3. Instale as dependências 
