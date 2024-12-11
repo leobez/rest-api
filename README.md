@@ -1,11 +1,10 @@
 # RESTful API
 Teste técnico.
 
-## Tecnologias utilizadas
+## Tecnologias necessárias
 - Node.js 22.12.0 (LTS)
-- Express
 - npm
-- Postman
+- Git bash
 
 ## Instalação
 1. Clone o repositório:
@@ -40,14 +39,24 @@ A API estará disponível em http://localhost:3000
 
 ### Observações  
 - Certifique-se de configurar as variáveis de ambiente corretamente para rodar a API.
+  
+- Algumas rotas são protegidas para permitir apenas usuários autenticados.
+
+- Algumas rotas possuem um limitador de requisições: 10 para usuários autenticados e 3 para não autenticados.
+  
 - Use ferramentas como Postman para testar as rotas.
-- Com relação a autenticação... (cookies)
+  
+- Caso use o Postman, é possível importar o arquivo /rest-api/postman/api-rest.postman_collection.json.
+  
+- A autenticação da aplicação é feita através de tokens JWT salvos nos cookies da requisição. Não é necessário configurar nenhuma forma de autenticação no Postman, visto que são configurados automaticamente.
+
+[ IMG ]
 
 ## Rotas
 
 ### 1. **Teste**  
 
-#### **POST /**  
+#### **GET /**  
 Retorna uma mensagem indicando que a API está rodando corretamente.  
 
 ---
@@ -100,10 +109,10 @@ Retorna todos os personagens disponiveis (paginados) em https://rickandmortyapi.
 Adiciona o personagem de :id aos favoritos do usuário. Uma linha é adicionada ao banco de dados.
 
 #### **GET /api/character/favorite**  
-Retorna todos os personagens favoritos do usuário.
+Retorna todos os personagens favoritos do usuário. É feita uma busca no banco de dados.
 
 #### **PUT /api/character/favorite/:id**  
-Caso usuário tenha algum personagem de characterId = :id (param) em seus favoritos, esse será atualizado para o personagem de characterId = newId (body)
+Caso o usuário tenha algum personagem de characterId = :id (param) em seus favoritos, esse será atualizado para o personagem de characterId = newId (body). Uma linha é atualizada no banco de dados.
 
 - **Parâmetros**:  
   - Body (JSON):  
@@ -120,5 +129,11 @@ Caso o usuário tenha algum personagem de characterId = :id (param) em seus favo
 Retorna uma contagem de episódios na qual cada personagem presente na lista de favoritos do usuário estava. 
 
 #### **GET /api/character/favorite/episode-count-all**  
-Retorna uma contagem de episódios na qual TODOS os personagem presente na lista de favoritos do usuário estavam. 
+Retorna uma contagem de episódios na qual TODOS os personagem presentes na lista de favoritos do usuário estavam. 
 
+## Principais tecnologias utilizadas
+- Node.js
+- Express
+- npm
+- SQLite
+- Postman
