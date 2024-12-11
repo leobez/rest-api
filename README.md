@@ -5,6 +5,7 @@ Teste técnico.
 - Node.js 22.12.0 (LTS)
 - Express
 - npm
+- Postman
 
 ## Instalação
 1. Clone o repositório:
@@ -59,23 +60,11 @@ Registra o usuário na base de dados e retorna cookies contendo um token JWT.
       "password": "string"
     }
     ```
-- **Resposta**:  
-  - **200 OK**:  
-    ```json
-    {
-      "token": "string"
-    }
-    ```
-  - **401 Unauthorized**:  
-    ```json
-    {
-      "error": "Invalid credentials"
-    }
-    ```
 
 ... (TODO)
 
 
 ### Observações  
-- Certifique-se de configurar as variáveis de ambiente corretamente para rodar a API e habilitar a autenticação.  
-- Use ferramentas como Postman ou cURL para testar as rotas.
+- Certifique-se de configurar as variáveis de ambiente corretamente para rodar a API.
+- Use ferramentas como Postman para testar as rotas.
+- Com relação a autenticação...

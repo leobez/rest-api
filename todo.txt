@@ -1,7 +1,1 @@
--> Talvez usar PATH nas invocações dos modulos
-
 -> Revistar status http error codes
-
--> Fazer documentação (README)
-
--> See: .env, commands to interact with project?

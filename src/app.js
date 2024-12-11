@@ -12,14 +12,14 @@ app.use(express.json()) // Sends and receives json data
 const cookieParser = require('cookie-parser')
 app.use(cookieParser()) // Parses cookie header and creates req.cookies object, which is simpler to access
 
-// Cors -> Determine origins that can access this api. 
+// Cors
 const cors = require('cors')
 const corsOptions = {
     origin: `http://localhost:${PORT}`,
-    methods: ['GET', 'POST'],
-    //allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true // Allows for data to be saved on cookies
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true // Allows cookies to be sent and received
 }
+
 app.use(cors(corsOptions))
 
 /* ROUTES */

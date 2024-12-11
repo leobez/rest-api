@@ -1,7 +1,6 @@
 const sqlite3 = require('sqlite3').verbose()
 const fs = require('fs')
 const path = require('path')
-const bcrypt = require('bcrypt')
 const DB_PATH = path.join(__dirname, 'database.sqlite3')
 
 // Delete existing DB file (if exists)
@@ -18,11 +17,6 @@ const db = new sqlite3.Database(DB_PATH, (err) => {
         console.log('Connected to SQLITE3 database')
     }
 })
-
-
-// Default password for testing (TO REMOVE)
-const salt = bcrypt.genSaltSync(12)
-const hash = bcrypt.hashSync('pass1', salt)
 
 // Run commands in order
 db.serialize(() => {
@@ -58,64 +52,6 @@ db.serialize(() => {
             console.log('Table Favorite created')
         }
     })
-
-    // Insert some data just for testing (Users)
-    // username: user1
-    // password: pass1
-/*     db.run(`
-        
-        INSERT INTO Users(username, password) VALUES (?, ?)
-
-    `, ['user1', hash], (err) => {
-        
-        if (err) {
-            console.log('Error while inserting test data: ', err.message)
-        } else {
-            console.log('Test data added on Users table: user1, pass1')
-        }
-    }), */
-
-    // Insert some data just for testing (Favorite)
-    // username: user1
-    // password: pass1
-/*     db.run(`
-        
-        INSERT INTO Favorite(userId, characterId, characterName) VALUES (?, ?, ?)
-
-    `, ['1', '1', 'Test_1'], (err) => {
-        
-        if (err) {
-            console.log('Error while inserting test data: ', err.message)
-        } else {
-            console.log('Test data added on Users table: user1, pass1')
-        }
-    }),
-
-    db.run(`
-        
-        INSERT INTO Favorite(userId, characterId, characterName) VALUES (?, ?, ?)
-
-    `, ['1', '2', 'Test_2'], (err) => {
-        
-        if (err) {
-            console.log('Error while inserting test data: ', err.message)
-        } else {
-            console.log('Test data added on Users table: user1, pass1')
-        }
-    }),
-
-    db.run(`
-        
-        INSERT INTO Favorite(userId, characterId, characterName) VALUES (?, ?, ?)
-
-    `, ['1', '10', 'Test_3'], (err) => {
-        
-        if (err) {
-            console.log('Error while inserting test data: ', err.message)
-        } else {
-            console.log('Test data added on Users table: user1, pass1')
-        }
-    }) */
 
 })
 
